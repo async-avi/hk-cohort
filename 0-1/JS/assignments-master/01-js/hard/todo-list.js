@@ -11,7 +11,10 @@
 */
 
 class Todo {
-
+  constructor(todoInput) {
+    this.todoInput = todoInput;
+  }
+  add() {}
 }
 
 module.exports = Todo;

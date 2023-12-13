@@ -6,7 +6,11 @@
 */
 
 function countVowels(str) {
-  // Your code here
+  let vowelCount = 0;
+  let checkVowel = str.includes(`a`, `e`, `i`, `o`, `u`);
+  if (checkVowel) {
+    return vowel;
+  }
 }
 
 export default countVowels;
