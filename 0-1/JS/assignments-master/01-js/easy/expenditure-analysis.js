@@ -14,7 +14,10 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let list = [];
+  let { id, timestamp, price, category, itemName } = transactions;
+
+  return list;
 }
 
 module.exports = calculateTotalSpentByCategory;
