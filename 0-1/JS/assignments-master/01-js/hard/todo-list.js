@@ -15,6 +15,7 @@ class Todo {
     this.todoInput = todoInput;
   }
   add() {}
+  remove() {}
 }
 
 module.exports = Todo;

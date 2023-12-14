@@ -6,11 +6,17 @@
 */
 
 function countVowels(str) {
-  let vowelCount = 0;
-  let checkVowel = str.includes(`a`, `e`, `i`, `o`, `u`);
-  if (checkVowel) {
-    return vowel;
+  let vowelCount = [];
+  let vowels = ["a", "e", "i", "o", "u"];
+  for (let i = 0; i < str.length; i++) {
+    element = str[i];
+    for (let j = 0; j < vowels.length; j++) {
+      if (element == vowels[j] || element == vowels[j].toUpperCase()) {
+        vowelCount.push(vowels[j]);
+      }
+    }
   }
+  return vowelCount.length;
 }
 
-export default countVowels;
+module.exports = countVowels;
