@@ -8,9 +8,14 @@ function isAnagram(str1, str2) {
   let anagram = false;
 
   for (let i = 0; i < str1.length; i++) {
-    const element = str1[i];
+    let element = str1[i];
+    for (let j = 0; j < str2.length; j++) {
+      if (element === str2[j]) {
+        anagram = true;
+        return anagram;
+      }
+    }
   }
-
   return anagram;
 }
 
