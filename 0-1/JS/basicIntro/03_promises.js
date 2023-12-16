@@ -23,7 +23,7 @@ function getHours() {
   });
 }
 
-function greet(data) {
+function greetIf(data) {
   if (data < 12 && data > 0) {
     console.log("Good Morning");
   } else if (data > 12 && data < 20) {
@@ -32,3 +32,11 @@ function greet(data) {
     console.log("Good Night");
   }
 }
+
+async function main() {
+  console.log("Hi there");
+  const data = await getHours();
+  greetIf(data);
+}
+
+main();
