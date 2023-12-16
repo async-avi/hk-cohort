@@ -18,7 +18,7 @@
 
 class Calculator {
   constructor(number) {
-    this.result = 0;
+    this.result = null;
     this.number = number;
   }
   addition() {
