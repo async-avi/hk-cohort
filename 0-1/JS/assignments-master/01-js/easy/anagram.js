@@ -6,17 +6,22 @@
 
 function isAnagram(str1, str2) {
   let anagram = false;
+  let arr = [];
 
   for (let i = 0; i < str1.length; i++) {
-    let element = str1[i];
-    for (let j = 0; j < str2.length; j++) {
-      if (element === str2[j]) {
-        anagram = true;
-        return anagram;
-      }
+    let elementsUpperCase = str1[i].toUpperCase();
+    if (str2.includes(elementsUpperCase)) {
+      arr.push(elementsUpperCase);
+    } else if (str2.includes(str1[i])) {
+      arr.push(str2[i]);
     }
   }
-  return anagram;
+
+  if (arr.length === str1.length) {
+    return true;
+  } else {
+    return anagram;
+  }
 }
 
 module.exports = isAnagram;
