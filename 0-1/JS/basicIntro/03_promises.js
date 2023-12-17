@@ -34,7 +34,7 @@ function greetIf(data) {
 }
 
 async function main() {
-  console.log("Hi there");
+  console.log("Hi there, welcome");
   const data = await getHours();
   greetIf(data);
 }
