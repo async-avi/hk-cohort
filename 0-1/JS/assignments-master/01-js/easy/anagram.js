@@ -6,21 +6,16 @@
 
 function isAnagram(str1, str2) {
   let arr = [];
-
-  if (str1.length === str2.length) {
-    for (let i = 0; i < str1.length; i++) {
-      convert1 = str1[i].toLowerCase();
-      convert2 = str2[i].toLowerCase();
-      if (str2.includes(convert1) || str1.includes(convert2)) {
-        arr.push(convert1);
-      }
+  let string1 = str1.toLowerCase().split("").join("");
+  let string2 = str2.toLowerCase().split("").join("");
+  for (let i = 0; i < string1.length; i++) {
+    if (string1.includes(string2[i])) {
+      arr.push(string2[i]);
     }
   }
-
   if (arr.length === str1.length) {
     return true;
   }
-
   return false;
 }
 
