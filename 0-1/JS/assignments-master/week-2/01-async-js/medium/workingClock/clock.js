@@ -3,7 +3,7 @@ async function main() {
     let date = new Date();
     if (date.getHours() > 12) {
       console.log(
-        `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} PM`
+        `${date.getHours()}:${date.getMinutes()}:${date.getSec + onds()} PM`
       );
     } else {
       console.log(
