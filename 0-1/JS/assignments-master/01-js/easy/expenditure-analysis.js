@@ -14,13 +14,6 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  let list = [];
-  let { id, timestamp, price, category, itemName } = transactions;
-  let spentOn = {
-    category,
-    totalSpent,
-  };
-
   return list;
 }
 
