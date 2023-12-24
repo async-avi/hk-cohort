@@ -5,6 +5,7 @@
  */
 
 function sleep(milliseconds) {
+  setTimeout(() => {}, milliseconds);
 }
 
 module.exports = sleep;
