@@ -8,8 +8,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send("Hi there");
-  console.log("request sent");
+  fs.readFile("tasks.txt", "utf-8", function (err, data) {
+    if (err) throw err;
+    res.send(`<h3>Tasks</h3>${data}`);
+  });
 });
 
 app.post("/addTask", (req, res) => {
@@ -26,6 +28,7 @@ app.post("/addTask", (req, res) => {
     });
   }
   update();
+  res.redirect("/");
 });
 
 app.listen(port, () => console.log(`Listening on ${port}`));
