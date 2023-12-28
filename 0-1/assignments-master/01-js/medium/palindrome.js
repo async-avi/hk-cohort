@@ -5,14 +5,17 @@
 
 function isPalindrome(str) {
   let arr = [];
-  str = str.toString().toLowerCase().replace(/\s/g, "");
-  let strRev = str.split("").reverse().join("");
-  for (i = 0; i < str.length; i++) {
-    if (str[i] === strRev[i]) {
+  let finalStr = str
+    .toString()
+    .toLowerCase()
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?\s]/g, "");
+  let strRev = finalStr.split("").reverse().join("");
+  for (i = 0; i < finalStr.length; i++) {
+    if (finalStr[i] === strRev[i]) {
       arr.push(str[i]);
     }
   }
-  if (arr.length === str.length) return true;
+  if (arr.length === finalStr.length) return true;
   return false;
 }
 
