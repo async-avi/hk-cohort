@@ -8,8 +8,8 @@ let users = [
     name: "John",
     age: 42,
     kidneys: [
-      { condition: "90%", status: "Healthy functioning" },
-      { condition: "50%", status: "Prone to damage" },
+      { condition: "90%", healthy: true },
+      { condition: "50%", healthy: false },
     ],
   },
 ];
@@ -24,6 +24,16 @@ app.post("/", (req, res) => {
     status: "99%",
   };
   users[0].kidneys.push(newKidney);
+  res.redirect("/");
+});
+
+app.put("/", (req, res) => {});
+
+app.delete("/", (req, res) => {
+  let kidneyArr = users[0].kidneys;
+  kidneyArr = kidneyArr.filter((kidney) => {
+    return kidney.healthy === true;
+  });
   res.redirect("/");
 });
 
