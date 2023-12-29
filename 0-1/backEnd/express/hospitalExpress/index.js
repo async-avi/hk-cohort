@@ -12,11 +12,6 @@ let users = [
       { condition: "50%", status: "Prone to damage" },
     ],
   },
-  {
-    name: "Tina",
-    age: 18,
-    kidneys: [{ condition: "Sold for Iphone" }],
-  },
 ];
 
 app.get("/", (req, res) => {
