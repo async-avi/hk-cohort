@@ -40,7 +40,13 @@ app.post("/", (req, res) => {
   res.redirect("/");
 });
 
-app.put("/", (req, res) => {});
+app.put("/", (req, res) => {
+  for (let i = 0; i < users[0].kidneys.length; i++) {
+    if (users[i].kidneys.healthy === false) {
+      res.send(users[i].kidneys);
+    }
+  }
+});
 
 app.delete("/", (req, res) => {});
 
