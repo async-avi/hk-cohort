@@ -3,6 +3,8 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 let users = [
   {
     name: "John",
@@ -15,26 +17,31 @@ let users = [
 ];
 
 app.get("/", (req, res) => {
-  res.send(users[0].kidneys);
+  let kidneys = users[0].kidneys;
+  let numberOfKidneys = kidneys.length;
+  let numberOfHealthyKidneys = 0;
+  for (let i = 0; i < kidneys.length; i++) {
+    if (kidneys[i].healthy === true) {
+      numberOfHealthyKidneys = numberOfHealthyKidneys + 1;
+    }
+  }
+  let numberOfUnhealthyKidneys = numberOfKidneys - numberOfHealthyKidneys;
+
+  res.json({
+    numberOfKidneys,
+    numberOfHealthyKidneys,
+    numberOfUnhealthyKidneys,
+  });
 });
 
 app.post("/", (req, res) => {
-  let newKidney = {
-    condition: "Healthy functioning",
-    status: "99%",
-  };
-  users[0].kidneys.push(newKidney);
+  let newHealthyKidney = req.body;
+  users[0].kidneys.push(newHealthyKidney);
   res.redirect("/");
 });
 
 app.put("/", (req, res) => {});
 
-app.delete("/", (req, res) => {
-  let kidneyArr = users[0].kidneys;
-  kidneyArr = kidneyArr.filter((kidney) => {
-    return kidney.healthy === true;
-  });
-  res.redirect("/");
-});
+app.delete("/", (req, res) => {});
 
 app.listen(port, () => console.log(`App listening on ${port}`));
