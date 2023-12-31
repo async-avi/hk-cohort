@@ -41,11 +41,15 @@ app.post("/", (req, res) => {
 });
 
 app.put("/", (req, res) => {
-  for (let i = 0; i < users[0].kidneys.length; i++) {
-    if (users[i].kidneys.healthy === false) {
-      res.send(users[i].kidneys);
+  let kidneys = users[0].kidneys;
+  for (let i = 0; i < kidneys.length; i++) {
+    if (kidneys[i].healthy === false) {
+      kidneys[i].healthy = true;
     }
   }
+  res.json({
+    msg: "Kidney replaced",
+  });
 });
 
 app.delete("/", (req, res) => {});
