@@ -13,7 +13,6 @@ const twoMultiplier1 = arr.map((value) => {
 const twoMultiplier = (value) => {
   let newArr = [];
   for (let i = 0; i < value.length; i++) {
-    newArr.push(arr[i] * 2);
   }
   return newArr;
 };
