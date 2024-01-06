@@ -3,19 +3,13 @@
 ### Introduction
 
 ```javascript
-const introduction = (visiter) => {
-  console.log(
-    `Welcome ${visiter}, repo contains journey of fullstack development + DSA`
-  );
-};
+function intro() {
+  console.log("track of what I learnt from Cohort 2");
+}
 ```
 
-### Quote
+### Check Out
 
-```javascript
-(async () => {
-  if (motivation === "low") {
-    console.log("Start coding and feel better");
-  }
-})();
-```
+**Harkirat Singh**:
+[Github](https://github.com/hkirat)
+[Youtube](https://www.youtube.com/@harkirat1)
