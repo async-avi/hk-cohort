@@ -1,17 +1,17 @@
 {
-  "name": "02-jwt",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "name": "jwt",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2",
-    "zod": "^3.22.4"
-  }
+  "description": ""
 }
