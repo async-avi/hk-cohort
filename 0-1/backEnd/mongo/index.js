@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+function userExists(req, res, next) {
+  const email = req.body.email;
+  const password = req.body.password;
+  User.find({ email: email }).then((userFound) => {
+    console.log(userFound.length);
+  });
+}
+
 const User = mongoose.model("User", userSchema);
 
 const connectDB = async () => {
@@ -45,6 +53,12 @@ app.post("/signUp", (req, res) => {
       msg: "User successfully registered",
     })
   );
+});
+
+app.use(userExists);
+
+app.post("/signIn", (req, res) => {
+  res.status(202);
 });
 
 app.use((err, req, res, next) => {
