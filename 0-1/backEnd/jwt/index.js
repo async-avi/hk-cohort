@@ -2,7 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 
 const app = express();
-let jwtPassword = 1234567;
+const jwtPassword = "1234567";
 
 app.use(express.json());
 
@@ -16,6 +16,11 @@ const ALL_USERS = [
     email: "tina2988@gmail.com",
     password: "12345",
     username: "Tina",
+  },
+  {
+    email: "salmankhan123@gmail.com",
+    password: "1234567",
+    username: "Salman",
   },
 ];
 
@@ -44,7 +49,25 @@ app.post("/signin", (req, res) => {
   });
 });
 
-app.get("/users", async (req, res) => {});
+app.get("/users", (req, res) => {
+  let token = req.headers.authorization;
+  try {
+    let decode = jwt.decode(token, jwtPassword);
+    let email = decode.email;
+    let otherUser = ALL_USERS.filter((user) => {
+      if (user.email != email) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    res.json(otherUser);
+  } catch (err) {
+    res.status(403).json({
+      msg: "Error: Invalid token",
+    });
+  }
+});
 
 app.use((err, req, res, next) => {
   res.status(500).json({
