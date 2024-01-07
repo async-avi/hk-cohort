@@ -2,13 +2,13 @@ import express from "express";
 import jwt from "jsonwebtoken";
 
 const app = express();
-let jwtPass = 1234567;
+let jwtPassword = 1234567;
 
 app.use(express.json());
 
 const ALL_USERS = [
   {
-    email: "avi123@.gmail.com",
+    email: "avi123@gmail.com",
     password: "123",
     username: "Abhinav",
   },
@@ -29,18 +29,26 @@ function userExists(email, password) {
   return exists;
 }
 
-app.post("/signIn", (req, res) => {
+app.post("/signin", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
   if (!userExists(email, password)) {
-    res.status(404).json({
-      msg: "User does not exist",
+    res.status(403).json({
+      msg: "User does not exist in our DB",
     });
   }
-  let token = jwt.sign({ email: email }, jwtPass);
+  let token = jwt.sign({ email: email }, password);
   res.json({
     token,
+  });
+});
+
+app.get("/users", async (req, res) => {});
+
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    msg: "Something wrong is with our server",
   });
 });
 
