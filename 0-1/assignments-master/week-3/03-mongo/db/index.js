@@ -1,9 +1,16 @@
 const mongoose = require("mongoose");
 const MongoURL =
-  "mongodb+srv://avi:avi123@assignmentmongo.w0nadub.mongodb.net/";
+  "mongodb+srv://avi:Notsoweak1323@assignmentmongo.w0nadub.mongodb.net";
 
 // Connect to MongoDB
-mongoose.connect(MongoURL);
+function connectDB() {
+  try {
+    let connectionInstance = mongoose.connect(MongoURL);
+    connectionInstance.then((data) => console.log(data.connection.host));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // Define schemas
 const AdminSchema = new mongoose.Schema({
@@ -11,7 +18,7 @@ const AdminSchema = new mongoose.Schema({
   username: String,
   email: String,
   password: String,
-  courses: [CourseSchema],
+  courses: [],
 });
 
 const UserSchema = new mongoose.Schema({
@@ -25,7 +32,6 @@ const CourseSchema = new mongoose.Schema({
   title: String,
   description: String,
   price: String,
-  author: { type: Schema.Types.username, ref: "Users" },
 });
 
 const Admin = mongoose.model("Admin", AdminSchema);
@@ -36,4 +42,5 @@ module.exports = {
   Admin,
   User,
   Course,
+  connectDB,
 };
