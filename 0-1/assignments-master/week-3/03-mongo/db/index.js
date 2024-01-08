@@ -15,7 +15,6 @@ function connectDB() {
 // Define schemas
 const AdminSchema = new mongoose.Schema({
   // Schema definition here
-  username: String,
   email: String,
   password: String,
   courses: [],
@@ -23,7 +22,7 @@ const AdminSchema = new mongoose.Schema({
 
 const UserSchema = new mongoose.Schema({
   // Schema definition here
-  username: String,
+  email: String,
   password: String,
 });
 
