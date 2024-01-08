@@ -42,6 +42,14 @@ function signJwt(username, password) {
  */
 function verifyJwt(token) {
   // Your code here
+  try {
+    let verification = jwt.verify(token, jwtPassword);
+    if (verification) {
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
 }
 
 /**
