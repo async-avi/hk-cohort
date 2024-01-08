@@ -6,6 +6,7 @@
 function intro() {
   console.log("track of what I learnt from Cohort 2");
 }
+intro()
 ```
 
 ### Check Out
