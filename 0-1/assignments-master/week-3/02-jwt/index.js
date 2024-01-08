@@ -28,9 +28,7 @@ function signJwt(username, password) {
     );
     return signature;
   } catch (error) {
-    res.json({
-      msg: error,
-    });
+    return null;
   }
 }
 
@@ -55,6 +53,11 @@ function verifyJwt(token) {
  */
 function decodeJwt(token) {
   // Your code here
+  let decoded = jwt.decode(token);
+  if (decoded) {
+    return true;
+  }
+  return false;
 }
 
 module.exports = {
