@@ -37,10 +37,11 @@ app.post("/signUp", async (req, res) => {
         msg: "User successfully created",
       })
     );
+  } else {
+    res.json({
+      msg: "User already exists",
+    });
   }
-  res.json({
-    msg: "User already exists",
-  });
 });
 
 app.post("/signIn", async (req, res) => {
