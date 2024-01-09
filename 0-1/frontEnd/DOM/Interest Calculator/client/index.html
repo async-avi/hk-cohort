@@ -19,6 +19,8 @@
 
       <button type="submit">Calculate</button>
     </form>
+    <p>Interest Earned: <span id="ie">0</span></p>
+    <p>Total Amount: <span id="ta">0</span></p>
 
     <script type="text/javascript">
       const form = document.getElementById("form");
@@ -27,11 +29,14 @@
         let p = form.p.value;
         let r = form.r.value;
         let t = form.t.value;
-        let ans;
         if (p && r && t) {
-          let fetchData = await fetch(`http://localhost:3000/`);
+          let fetchData = await fetch(
+            `http://localhost:3000/si?p=${p}&r=${r}&t=${t}`
+          );
           let data = await fetchData.json();
-          console.log(data);
+          document.getElementById("ie").innerHTML = `₹ ${data.interestEarned}`;
+
+          document.getElementById("ta").innerHTML = `₹ ${data.totalAmount}/- `;
         } else {
           alert("Mind your inputs");
         }
