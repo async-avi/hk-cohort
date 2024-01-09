@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Interest Calculator</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <form id="form">
+      <h3>Initial investment</h3>
+      <input type="text" name="p" />
+
+      <h3>Expected Rate of Interest</h3>
+      <input type="text" name="r" />
+
+      <h3>Expected time period (years)</h3>
+      <input type="text" name="t" />
+
+      <button type="submit">Calculate</button>
+    </form>
+    <p>Interest Earned: <span id="ie">0</span></p>
+    <p>Total Amount: <span id="ta">0</span></p>
+
+    <script type="text/javascript">
+      const form = document.getElementById("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let p = form.p.value;
+        let r = form.r.value;
+        let t = form.t.value;
+        if (p && r && t) {
+          let fetchData = await fetch(
+            `http://localhost:3000/si?p=${p}&r=${r}&t=${t}`
+          );
+          let data = await fetchData.json();
+          document.getElementById("ie").innerHTML = `₹ ${data.interestEarned}`;
+
+          document.getElementById("ta").innerHTML = `₹ ${data.totalAmount}/- `;
+        } else {
+          alert("Mind your inputs");
+        }
+      });
+    </script>
+  </body>
+</html>
