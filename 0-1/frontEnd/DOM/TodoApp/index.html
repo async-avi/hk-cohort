@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Todo</title>
+  </head>
+  <body>
+    <h2>Basic Todo App Made from DOM</h2>
+    <form
+      id="form"
+      style="border: 5px solid black; padding: 20px; width: 20rem"
+    >
+      <h3>Add Todos</h3>
+      <h4>Add title</h4>
+      <input type="text" name="title" />
+      <h4>Add description</h4>
+      <input type="text" name="desc" />
+      <button type="submit">Add todo</button>
+    </form>
+    <div id="showtodo">
+      <h2>Your todos</h2>
+    </div>
+    <script type="text/javascript">
+      let allTodos = [];
+      let form = document.getElementById("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let title = form.title.value;
+        let desc = form.desc.value;
+        if (title && desc) {
+          let todo = {
+            title,
+            desc,
+          };
+          allTodos.push(todo);
+          let newDiv = document.createElement("div");
+          newDiv.style.margin = "5px 0px 5px 0px";
+          let titleHead = document.createElement("h4");
+          titleHead.style.margin = "5px";
+          newDiv.appendChild(titleHead);
+          document.getElementById("showtodo").appendChild(newDiv);
+          document.getElementById;
+          allTodos.forEach((todo) => {
+            titleHead.appendChild(document.createTextNode(todo.title));
+            newDiv.appendChild(document.createTextNode(todo.desc));
+          });
+        } else {
+          alert("Please mind your inputs");
+        }
+      });
+    </script>
+  </body>
+</html>
