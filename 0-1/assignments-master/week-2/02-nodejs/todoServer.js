@@ -39,11 +39,55 @@
 
   Testing the server - run `npm run test-todoServer` command in terminal
  */
-  const express = require('express');
-  const bodyParser = require('body-parser');
-  
-  const app = express();
-  
-  app.use(bodyParser.json());
-  
-  module.exports = app;
+const express = require("express");
+const bodyParser = require("body-parser");
+const todos = require("./todos.json");
+
+const app = express();
+let idCount = 0;
+
+app.use(bodyParser.json());
+
+//?get route
+app.get("/todos", (req, res) => res.status(200).json(todos));
+
+app.post("/todos", (req, res) => {
+  idCount++;
+  try {
+    let todo = {
+      id: idCount,
+      title: req.body.title,
+      completed: req.body.completed,
+      description: req.body.description,
+    };
+    todos.push(todo);
+    res.status(201).json({
+      id: todo.id,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Something went wrong",
+    });
+  }
+});
+
+app.get("/todos/:id", async (req, res) => {
+  let id = req.params.id;
+  let todoFound;
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].id == id) {
+      todoFound = todos[i];
+    }
+  }
+  if (todoFound) {
+    res.status(200).json(todoFound);
+  } else {
+    res.status(404).json({
+      error: "Not Found",
+    });
+  }
+});
+
+// app.listen(8000);
+
+module.exports = app;
