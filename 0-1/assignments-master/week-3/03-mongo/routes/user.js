@@ -34,12 +34,46 @@ router.get("/courses", async (req, res) => {
   );
 });
 
-router.post("/courses/:courseId", userMiddleware, (req, res) => {
+router.post("/courses/:courseId", userMiddleware, async (req, res) => {
   // Implement course purchase logic
+  let username = req.headers.username;
+  let courseId = req.params.courseId;
+  try {
+    let courseFound = await Course.findById(courseId);
+    try {
+      await User.updateOne(
+        { username: username },
+        { $push: { purchased: courseFound._id } }
+      );
+      res.status(202).json({
+        msg: "Course purchased",
+        Course: courseFound.title,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Could not find Course with this id" });
+  }
 });
 
-router.get("/purchasedCourses", userMiddleware, (req, res) => {
+router.get("/purchasedCourses", userMiddleware, async (req, res) => {
   // Implement fetching purchased courses logic
+  let username = req.headers.username;
+  let purchasedCourses = [];
+  let purchasedCourseDetails = [];
+  let user = await User.findOne({ username: username });
+  let purchasedCoursesByUser = user.purchased;
+  for (let i = 0; i < purchasedCoursesByUser.length; i++) {
+    purchasedCourseDetails = await Course.findOne({
+      _id: purchasedCoursesByUser[i],
+    });
+    // console.log(purchasedCourseDetails);
+    purchasedCourses.push(purchasedCourseDetails);
+  }
+  res.status(200).json({
+    purchasedCourses: purchasedCourses,
+  });
 });
 
 module.exports = router;
