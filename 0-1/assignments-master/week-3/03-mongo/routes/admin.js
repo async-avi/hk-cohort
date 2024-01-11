@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/admin");
-const { Admin, Course } = require("../db");
+const { Admin, Course, User } = require("../db");
 const router = Router();
 
 // Admin Routes
@@ -29,13 +29,25 @@ router.post("/courses", adminMiddleware, async (req, res) => {
   let price = req.body.price;
   let adminUsername = req.headers.username;
   try {
-    await Course.create({
+    let newCourse = await Course.create({
       title: title,
       description: description,
       price: price,
       publisher: adminUsername,
     });
-    res.status(202).json({ success: true, msg: "Course created successfully" });
+    try {
+      await Admin.updateOne(
+        { username: adminUsername },
+        { $push: { courses: newCourse._id } }
+      );
+      res
+        .status(202)
+        .json({ success: true, msg: "Course created successfully" });
+    } catch (error) {
+      res.status(500).json({
+        msg: "Something went wrong",
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
