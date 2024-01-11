@@ -30,28 +30,6 @@ app.get("/files", (req, res) => {
   });
 });
 
-app.get("/files/:filename", (req, res) => {
-  let fName = req.params.filename;
-  fs.readdir(filePath, "utf-8", (err, files) => {
-    if (err) {
-      res.status(500).json({
-        msg: "Something went wrong with our server",
-      });
-    }
-    let desiredFile;
-    for (let i = 0; i < files.length; i++) {
-      if (files[i] == fName) {
-        console.log(files[i]);
-      }
-    }
-    if (!desiredFile) {
-      res.status(404).json({
-        msg: "Could Not Found",
-      });
-    }
-  });
-});
-
-app.listen(8000);
+// app.listen(8000);
 
 module.exports = app;
