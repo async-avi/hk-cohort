@@ -88,6 +88,29 @@ app.get("/todos/:id", async (req, res) => {
   }
 });
 
+app.put("/todos/:id", async (req, res) => {
+  let id = req.params.id;
+  let title = req.body.title;
+  let completed = req.body.completed;
+  let description = req.body.description;
+  let updatedTodo;
+  for (let i = 0; i < todos.length; i++) {
+    let element = todos[i];
+    if (element.id == id) {
+      if (title) element.title = title;
+      if (completed) element.completed = completed;
+      if (description) element.description = description;
+      updatedTodo = element;
+    }
+  }
+  if (!updatedTodo) {
+    res.status(404).json({
+      error: "Not found",
+    });
+  }
+  res.status(200).json(updatedTodo);
+});
+
 // app.listen(8000);
 
 module.exports = app;
