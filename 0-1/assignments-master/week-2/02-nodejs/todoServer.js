@@ -41,7 +41,7 @@
  */
 const express = require("express");
 const bodyParser = require("body-parser");
-const todos = require("./todos.json");
+let todos = require("./todos.json");
 
 const app = express();
 let idCount = 0;
@@ -109,6 +109,23 @@ app.put("/todos/:id", async (req, res) => {
     });
   }
   res.status(200).json(updatedTodo);
+});
+
+app.delete("/todos/:id", async (req, res) => {
+  let id = req.params.id;
+  let toBeDeletedTodo;
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].id == id) toBeDeletedTodo = todos[i];
+  }
+  if (!toBeDeletedTodo) {
+    res.status(404).json({
+      error: "Not found",
+    });
+  }
+  todos = todos.filter((todo) => todo.id != toBeDeletedTodo.id);
+  res.status(200).json({
+    msg: "Item deleted successfully",
+  });
 });
 
 // app.listen(8000);
