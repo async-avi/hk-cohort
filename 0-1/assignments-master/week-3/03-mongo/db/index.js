@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 let mongoURL =
-  "mongodb+srv://avi:notsoweak123@assignmentmongo.w0nadub.mongodb.net/";
+  "mongodb+srv://avi:notsoweak123@assignmentmongo.w0nadub.mongodb.net";
 // Connect to MongoDB
 function connectDB() {
   let connectionInstance = mongoose.connect(`${mongoURL}/pewdemy`);
@@ -9,25 +9,26 @@ function connectDB() {
 }
 
 // Define schemas
-const AdminSchema = new mongoose.Schema({
-  // Schema definition here
-  username: String,
-  password: String,
-  courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Courses" }],
-});
-
-const UserSchema = new mongoose.Schema({
-  // Schema definition here
-  username: String,
-  password: String,
-});
-
 const CourseSchema = new mongoose.Schema({
   // Schema definition here
   title: String,
   description: String,
   price: String,
   publisher: { type: mongoose.Schema.Types.ObjectId, ref: "Admins" },
+});
+
+const AdminSchema = new mongoose.Schema({
+  // Schema definition here
+  username: String,
+  password: String,
+  courses: [CourseSchema],
+});
+
+const UserSchema = new mongoose.Schema({
+  // Schema definition here
+  username: String,
+  password: String,
+  purchased: [CourseSchema],
 });
 
 const Admin = mongoose.model("Admin", AdminSchema);
