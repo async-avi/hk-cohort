@@ -17,10 +17,10 @@ const fs = require("fs");
 const path = require("path");
 const app = express();
 
-let filePath = path.basename("./files");
+let fileArrPath = path.basename("./files");
 
 app.get("/files", (req, res) => {
-  fs.readdir(filePath, "utf-8", (err, files) => {
+  fs.readdir(fileArrPath, "utf-8", (err, files) => {
     if (err) {
       res.status(500).json({
         msg: "Something went wrong with our server",
@@ -30,6 +30,20 @@ app.get("/files", (req, res) => {
   });
 });
 
-// app.listen(8000);
+app.get("/files/:filename", (req, res) => {
+  let fName = req.params.filename;
+  fs.readFile(`${fileArrPath}/${fName}`, `utf-8`, (err, data) => {
+    if (err) {
+      res.status(404).send("File not found");
+    }
+    res.send(data);
+  });
+});
+
+app.all("*", (req, res) => {
+  res.status(404).send("Route not found");
+});
+
+app.listen(8000);
 
 module.exports = app;
