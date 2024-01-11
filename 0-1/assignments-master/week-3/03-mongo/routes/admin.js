@@ -1,35 +1,59 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/admin");
-const { Admin } = require("../db");
+const { Admin, Course } = require("../db");
 const router = Router();
 
 // Admin Routes
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
   // Implement admin signup logic
   let username = req.body.username;
   let password = req.body.password;
-  let newAdmin = new Admin({
-    username: username,
-    password: password,
-  });
   try {
-    newAdmin.save();
-    res.status(200).json({
-      msg: "Admin created",
+    await Admin.create({
+      username,
+      password,
     });
+    res.status(200).json({ success: true, msg: "User created successfully" });
   } catch (error) {
     res.status(500).json({
       msg: "Error ",
     });
+    console.log(error);
   }
 });
 
-router.post("/courses", adminMiddleware, (req, res) => {
+router.post("/courses", adminMiddleware, async (req, res) => {
   // Implement course creation logic
+  let title = req.body.title;
+  let description = req.body.description;
+  let price = req.body.price;
+  let adminUsername = req.headers.username;
+  try {
+    await Course.create({
+      title: title,
+      description: description,
+      price: price,
+      publisher: adminUsername,
+    });
+    res.status(202).json({ success: true, msg: "Course created successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-router.get("/courses", adminMiddleware, (req, res) => {
+router.get("/courses", adminMiddleware, async (req, res) => {
   // Implement fetching all courses logic
+  try {
+    await Course.find({}).then((courseArr) => {
+      res.status(200).json({
+        courses: courseArr,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 module.exports = router;

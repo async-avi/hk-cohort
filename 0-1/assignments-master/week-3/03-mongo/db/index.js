@@ -9,26 +9,27 @@ function connectDB() {
 }
 
 // Define schemas
-const CourseSchema = new mongoose.Schema({
-  // Schema definition here
-  title: String,
-  description: String,
-  price: String,
-  publisher: { type: mongoose.Schema.Types.ObjectId, ref: "Admins" },
-});
 
 const AdminSchema = new mongoose.Schema({
   // Schema definition here
   username: String,
   password: String,
-  courses: [CourseSchema],
+  courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Courses" }],
 });
 
 const UserSchema = new mongoose.Schema({
   // Schema definition here
   username: String,
   password: String,
-  purchased: [CourseSchema],
+  purchased: [{ type: mongoose.Schema.Types.ObjectId, ref: "Courses" }],
+});
+
+const CourseSchema = new mongoose.Schema({
+  // Schema definition here
+  title: String,
+  description: String,
+  price: String,
+  publisher: String,
 });
 
 const Admin = mongoose.model("Admin", AdminSchema);
