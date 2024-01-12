@@ -35,6 +35,16 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.delete("/:id", async (req, res) => {
+  let id = req.params.id;
+  try {
+    await Todo.deleteOne({ _id: id });
+    res.json({ msg: "Todo deleted successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
   connectDB();
