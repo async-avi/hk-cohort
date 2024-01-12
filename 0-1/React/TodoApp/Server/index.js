@@ -38,11 +38,10 @@ app.post("/", async (req, res) => {
 app.put("/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    let updateTodo = await Todo.updateOne(
-      { _id: id },
-      { $set: { completed: true } }
-    );
-    console.log(updateTodo);
+    await Todo.updateOne({ _id: id }, { $set: { completed: true } });
+    res.status(200).json({
+      msg: "Todo updated successfully",
+    });
   } catch (error) {
     res.status(404).json({ error: error });
   }
