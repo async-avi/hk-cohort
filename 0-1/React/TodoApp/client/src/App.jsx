@@ -15,27 +15,50 @@ function App() {
 
   const postTodo = async () => {
     try {
-      let postedTodo = await axios.post("http://localhost:8000/", {
+      await axios.post("http://localhost:8000/", {
         title,
         description: desc,
       });
-      console.log(postedTodo);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // setInterval(async () => {
+  const deleteTodo = async (id) => {
+    await axios.delete(`http://localhost:8000/${id}`);
+  };
+
+  const updateTodo = async (id) => {
+    await axios.put(`http://localhost:8000/${id}`);
+  };
 
   const Todo = () => {
     return todos.map((todo) => {
-      const { title, description, _id } = todo;
-      return (
-        <div key={_id}>
-          <h2>{title}</h2>
-          <h3>{description}</h3>
-        </div>
-      );
+      const { title, description, _id, completed } = todo;
+      if (completed === false)
+        return (
+          <div key={_id}>
+            <h2>{title}</h2>
+            <h3>{description}</h3>
+            <button
+              onClick={() => {
+                updateTodo(_id);
+              }}
+            >
+              Mark as done
+            </button>
+            <button onClick={() => deleteTodo(_id)}>Delete</button>
+          </div>
+        );
+      if (completed === true)
+        return (
+          <div key={_id} style={{ color: "Green" }}>
+            <h2>{title}</h2>
+            <h3>{description}</h3>
+            <button>It is Done!!</button>
+            <button onClick={() => deleteTodo(_id)}>Delete</button>
+          </div>
+        );
     });
   };
 
