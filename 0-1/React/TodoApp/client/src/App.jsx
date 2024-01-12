@@ -44,10 +44,7 @@ function App() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log({
-            title,
-            description: desc,
-          });
+          postTodo();
         }}
       >
         <h4>Add title</h4>
