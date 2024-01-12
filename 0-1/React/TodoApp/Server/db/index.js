@@ -16,7 +16,6 @@ let todoSchema = new Schema({
   title: String,
   description: String,
   completed: Boolean,
-  owner: String,
 });
 
 const Todo = new mongoose.model("Todo", todoSchema);
