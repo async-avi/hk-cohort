@@ -35,6 +35,19 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.put("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    let updateTodo = await Todo.updateOne(
+      { _id: id },
+      { $set: { completed: true } }
+    );
+    console.log(updateTodo);
+  } catch (error) {
+    res.status(404).json({ error: error });
+  }
+});
+
 app.delete("/:id", async (req, res) => {
   let id = req.params.id;
   try {
