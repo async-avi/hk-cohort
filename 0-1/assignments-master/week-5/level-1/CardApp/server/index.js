@@ -1,5 +1,6 @@
 import express from "express";
 import { Card, connectDB } from "./db/index.js";
+import { emailSchemaZod, urlSchemaZod } from "./utils/zodSchema.js";
 
 const port = 3000;
 const app = express();
@@ -13,30 +14,31 @@ app.get("/", (req, res) => {
 });
 
 app.post("/new", async (req, res) => {
-  let name = req.body.name;
-  let company = req.body.company;
-  let jobDescription = req.body.jobDescription;
-  let email = req.body.email;
-  let github = req.body.github;
-  let linkedIn = req.body.linkedIn;
+  let socials = {
+    email: null,
+    github: null,
+    linkedIn: null,
+  };
+  if (req.body.email) {
+    socials.email = emailSchemaZod.parse(req.body.email);
+  }
+  if (req.body.github) {
+    socials.github = urlSchemaZod.parse(req.body.github);
+  }
 
   try {
     await Card.create({
-      name,
-      company,
-      jobDescription,
-      socials: {
-        email: email,
-        github: github,
-        linkedIn: linkedIn,
-      },
+      name: req.body.name || "UnKnown",
+      company: req.body.company,
+      jobDescription: req.body.jobDescription,
+      socials: socials,
     });
   } catch (error) {
-    res.status(505).json({ msg: "Mind your inputs" });
+    console.log(error);
   }
 });
 
-app.get("/userCard/:id", async (req, res) => {
+app.get("/card/:id", async (req, res) => {
   let id = req.params.id;
   const findUser = await Card.findOne({ _id: id });
   res.json(findUser);
