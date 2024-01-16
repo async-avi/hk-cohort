@@ -1,11 +1,13 @@
 import express from "express";
 import { Card, connectDB } from "./db/index.js";
 import { emailSchemaZod, urlSchemaZod } from "./utils/zodSchema.js";
+import cors from "cors";
 
 const port = 3000;
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -29,12 +31,24 @@ app.post("/new", async (req, res) => {
   try {
     await Card.create({
       name: req.body.name || "UnKnown",
-      company: req.body.company,
+      companyName: req.body.company,
       jobDescription: req.body.jobDescription,
       socials: socials,
     });
+    res.status(202).json({
+      msg: "Card created successfully",
+    });
   } catch (error) {
     console.log(error);
+  }
+});
+
+app.get("/all", async (req, res) => {
+  try {
+    let allCards = await Card.find({});
+    res.status(200).json(allCards);
+  } catch (err) {
+    throw err;
   }
 });
 
