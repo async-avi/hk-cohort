@@ -1,3 +1,6 @@
+import Button from "./Button";
+import mailpng from "../assets/mailpng.png";
+
 const Card = ({
   name,
   companyName,
@@ -26,7 +29,7 @@ const Card = ({
             );
           })
         : null}
-      {email ? <button>Email</button> : null}
+      {email ? <Button href={email} img={mailpng} name={"Email"} /> : null}
       {linkedIn ? <button>Email</button> : null}
       {github ? <button>Github</button> : null}
     </div>

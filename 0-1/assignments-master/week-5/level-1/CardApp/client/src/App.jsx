@@ -10,7 +10,7 @@ function App() {
         jobDescription="TA in byjus"
         exp="5 years"
         interests={["football", "gaming"]}
-        socials={{ github: true }}
+        socials={{ github: true, email: "https://www.google.com" }}
       />
     </>
   );
