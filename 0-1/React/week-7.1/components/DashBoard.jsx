@@ -6,4 +6,4 @@ const DashBoard = () => {
   );
 };
 
-export { DashBoard };
+export default DashBoard;
