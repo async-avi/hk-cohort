@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { styles } from "./styles";
 import Card from "../components/Card";
 
 function App() {
@@ -10,7 +11,11 @@ function App() {
         jobDescription="TA in byjus"
         exp="5 years"
         interests={["football", "gaming"]}
-        socials={{ github: true, email: "https://www.google.com" }}
+        socials={{
+          github: true,
+          email: "https://www.google.com",
+          linkedIn: "https://github.com",
+        }}
       />
     </>
   );

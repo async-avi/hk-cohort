@@ -1,5 +1,8 @@
 import Button from "./Button";
+import { styles } from "../src/styles";
 import mailpng from "../assets/mailpng.png";
+import linkdInPng from "../assets/linkedIn.png";
+import gitHubPng from "../assets/gitHub.png";
 
 const Card = ({
   name,
@@ -11,7 +14,7 @@ const Card = ({
 }) => {
   let { email, linkedIn, github } = socials;
   return (
-    <div>
+    <div style={styles.card}>
       <h2>{name}</h2>
       <h3>{companyName}</h3>
       {jobDescription}
@@ -30,8 +33,17 @@ const Card = ({
           })
         : null}
       {email ? <Button href={email} img={mailpng} name={"Email"} /> : null}
-      {linkedIn ? <button>Email</button> : null}
-      {github ? <button>Github</button> : null}
+      {linkedIn ? (
+        <Button href={linkedIn} img={linkdInPng} name={"linkedIn"} />
+      ) : null}
+      {github ? (
+        <Button
+          href={github}
+          name={"Github"}
+          img={gitHubPng}
+          design={styles.button.github}
+        />
+      ) : null}
     </div>
   );
 };
