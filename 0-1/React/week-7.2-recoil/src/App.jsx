@@ -15,6 +15,7 @@ function CountRenderer() {
     <RecoilRoot>
       <Count />
       <Buttons />
+      <IsEven />
     </RecoilRoot>
   );
 }
@@ -38,6 +39,13 @@ function Buttons() {
       <button onClick={() => setCount((count) => count - 1)}>Decrease</button>
     </div>
   );
+}
+
+function IsEven() {
+  const count = useRecoilValue(countAtom);
+  if (count % 2 == 0) {
+    return <h1>Count is Even</h1>;
+  } else null;
 }
 
 export default App;
