@@ -1,5 +1,5 @@
 import { RecoilRoot, useRecoilValue } from "recoil";
-import { headerCount } from "../store/atoms";
+import { headerCount, totalNotifications } from "../store/atoms";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
 
 function HeaderComponent() {
   const headerCountValue = useRecoilValue(headerCount);
+  const totalNotificationsValue = useRecoilValue(totalNotifications);
 
   return (
     <>
@@ -22,6 +23,7 @@ function HeaderComponent() {
       <button>Messages ({headerCountValue.messages})</button>
       <button>Notifications ({headerCountValue.notifications})</button>
       <button>Me</button>
+      <button> Total ({totalNotificationsValue})</button>
     </>
   );
 }
