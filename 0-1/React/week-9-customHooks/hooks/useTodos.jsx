@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const todosArr = [
   {
     id: 1,
@@ -13,13 +15,13 @@ const todosArr = [
   },
 ];
 
-function useTodos() {
+const useTodos = () => {
   const [todos, setTodos] = useState(null);
-  setTimeout(() => {
+  useEffect(() => {
     setTodos(todosArr);
-  }, 1500);
+  }, []);
 
   return todos;
-}
+};
 
 export default useTodos;
