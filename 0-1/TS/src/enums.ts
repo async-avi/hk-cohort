@@ -10,3 +10,15 @@ function movePlayer(direction: Direction): Direction {
 }
 
 console.log(movePlayer(Direction.Up));
+
+enum StatusCodes {
+  EverythingOK = 202,
+  Unauthorized = 411,
+  ServerNotFound = 505,
+}
+
+function serverError(statusCode: StatusCodes) {
+  return statusCode;
+}
+
+console.log(serverError(StatusCodes.ServerNotFound));
