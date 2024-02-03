@@ -54,3 +54,36 @@ const getElementMoreThan2: GenericInterface<number> = (
   const filteredArray = cb(arr);
   return filteredArray;
 };
+
+//conditional interface
+interface Person {
+  (name: string, age?: number): void;
+}
+
+const Greetings: Person = (name: string, age?: number) => {
+  const msg: string = "";
+  if (age) {
+    return `Hello ${name} ${age}`;
+  }
+  return `Hello ${name}`;
+};
+
+//overloading interface
+interface ConcernedArray {
+  (input: string | string[]): void;
+}
+const StringLength: ConcernedArray = (input: string | string[]) => input.length;
+
+//readOnly interface
+interface InputArr {
+  (input: number[]): readonly number[];
+}
+
+const ConvertToReadOnlyArray: InputArr = (input: number[]) => input;
+
+//variadic interface
+interface TakeInput {
+  (...args: string[]): string;
+}
+
+const concatenateStrings: TakeInput = (...args: string[]) => args.join("");
