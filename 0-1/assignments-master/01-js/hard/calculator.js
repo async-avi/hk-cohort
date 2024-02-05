@@ -17,16 +17,20 @@
 */
 
 class Calculator {
-  constructor(a, b) {
-    this.a = a;
-    this.b = b;
+  constructor() {
     this.result = 0;
   }
 
-  add() {
-    this.result = this.a + this.b;
+  add(num) {
+    this.result += num;
+  }
+  subtract(num) {
+    this.result -= num;
+  }
+  getResult() {
     return this.result;
   }
+  clear() {}
 }
 
 module.exports = Calculator;
