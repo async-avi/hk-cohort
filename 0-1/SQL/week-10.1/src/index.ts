@@ -39,4 +39,15 @@ async function insertDataInUserTable(
   }
 }
 
-insertDataInUserTable("Ramesh", "ramesh@gmail.com", "password1");
+async function findEmail(email: string) {
+  await client.connect();
+  try {
+    const query = "SELECT * FROM users WHERE email = $1";
+    const result = await client.query(query, [email]);
+    console.log(result);
+  } catch (error) {
+    console.log("Error finding email:", error);
+  }
+}
+
+findEmail("ramesh@gmail.com");
