@@ -2,7 +2,19 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function main() {}
+async function main() {
+  await prisma.post.create({
+    data: {
+      title: "Get started with Prisma",
+      content: "Guide to Prisma",
+      author: {
+        connect: {
+          id: 1,
+        },
+      },
+    },
+  });
+}
 
 main()
   .then(async () => {
