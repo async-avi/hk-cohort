@@ -41,46 +41,44 @@ export async function createTodo(
  *  id: number
  * }
  */
-// export async function updateTodo(todoId: number) {
-//   try {
-//     const updatedTodo = await prisma.todo.update({
-//       data: {
-//         done: true,
-//       },
-//       where: {
-//         id: todoId,
-//       },
-//     });
-//     console.log({
-//       msg: "Todo updated successfully",
-//       todo: updatedTodo,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function updateTodo(todoId: number) {
+  try {
+    const updatedTodo = await prisma.todo.update({
+      data: {
+        done: true,
+      },
+      where: {
+        id: todoId,
+      },
+    });
+    console.log({
+      msg: "Todo updated successfully",
+      todo: updatedTodo,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// /*
-//  *  Get all the todos of a given user
-//  * Should return an array of todos
-//  * [{
-//  *  title: string,
-//  *  description: string,
-//  *  done: boolean,
-//  *  id: number
-//  * }]
-//  */
-// export async function getTodos(userId: number) {
-//   try {
-//     const allTodos = await prisma.todo.findMany({
-//       where: {
-//         userId: userId,
-//       },
-//     });
-//     console.log(allTodos);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// getTodos(1);
+/*
+ *  Get all the todos of a given user
+ * Should return an array of todos
+ * [{
+ *  title: string,
+ *  description: string,
+ *  done: boolean,
+ *  id: number
+ * }]
+ */
+export async function getTodos(userId: number) {
+  try {
+    const allTodos = await prisma.todo.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+    console.log(allTodos);
+  } catch (error) {
+    console.log(error);
+  }
+}
