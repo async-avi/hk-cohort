@@ -65,4 +65,21 @@ export async function updateTodo(todoId: number) {
  *  id: number
  * }]
  */
-export async function getTodos(userId: number) {}
+export async function getTodos(userId: number) {
+  try {
+    const query = "SELECT * FROM todos WHERE user_id = $1";
+    const resp = await client.query(query, [userId]);
+    const allTodo = resp.rows;
+    allTodo.map((todo) => {
+      console.log({
+        title: todo.title,
+        description: todo.description,
+        done: todo.done,
+        id: todo.id,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+getTodos(1);
