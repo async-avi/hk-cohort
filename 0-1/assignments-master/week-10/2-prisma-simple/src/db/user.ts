@@ -38,4 +38,15 @@ export async function createUser(
  *   name: string
  * }
  */
-export async function getUser(userId: number) {}
+export async function getUser(userId: number) {
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    console.log(getUser);
+  } catch (error) {
+    console.log(error);
+  }
+}
