@@ -30,7 +30,6 @@ export async function createTodo(
   }
 }
 
-createTodo(1, "Go gym", "go to gym");
 /*
  * mark done as true for this specific todo.
  * Should return a todo object
@@ -41,7 +40,20 @@ createTodo(1, "Go gym", "go to gym");
  *  id: number
  * }
  */
-export async function updateTodo(todoId: number) {}
+export async function updateTodo(todoId: number) {
+  try {
+    const query = "UPDATE todos SET done = true WHERE id = $1 RETURNING *";
+    const resp = await client.query(query, [todoId]);
+    console.log({
+      title: resp.rows[0].title,
+      description: resp.rows[0].description,
+      done: resp.rows[0].done,
+      id: resp.rows[0].id,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 /*
  *  Get all the todos of a given user
