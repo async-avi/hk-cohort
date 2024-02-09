@@ -24,7 +24,7 @@ export async function createUser(
         name,
       },
     });
-    console.log(newUser);
+    return newUser;
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +45,7 @@ export async function getUser(userId: number) {
         id: userId,
       },
     });
-    console.log(getUser);
+    return getUser;
   } catch (error) {
     console.log(error);
   }

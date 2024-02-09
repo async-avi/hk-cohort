@@ -25,7 +25,12 @@ export async function createTodo(
         description,
       },
     });
-    console.log(newTodo);
+    return {
+      title: newTodo.title,
+      description: newTodo.description,
+      done: newTodo.done,
+      id: newTodo.id,
+    };
   } catch (error) {
     console.log(error);
   }
@@ -51,10 +56,16 @@ export async function updateTodo(todoId: number) {
         id: todoId,
       },
     });
-    console.log({
+    const { title, description, done, id } = updatedTodo;
+    return {
       msg: "Todo updated successfully",
-      todo: updatedTodo,
-    });
+      todo: {
+        title: title,
+        description: description,
+        done: done,
+        id: id,
+      },
+    };
   } catch (error) {
     console.log(error);
   }
@@ -77,7 +88,15 @@ export async function getTodos(userId: number) {
         userId: userId,
       },
     });
-    console.log(allTodos);
+    allTodos.map((todo) => {
+      const { title, description, done, id } = todo;
+      return {
+        title: title,
+        description: description,
+        done: done,
+        id: id,
+      };
+    });
   } catch (error) {
     console.log(error);
   }
