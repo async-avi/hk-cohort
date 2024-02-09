@@ -19,12 +19,12 @@ export async function createTodo(
       "INSERT INTO todos (user_id, title, description) VALUES ($1, $2, $3) RETURNING *";
     const resp = await client.query(query, [userId, title, description]);
     const respObject = resp.rows[0];
-    console.log({
+    return {
       title: respObject.title,
       description: respObject.description,
       done: respObject.done,
       id: respObject.id,
-    });
+    };
   } catch (error) {
     console.log(error);
   }
@@ -44,12 +44,12 @@ export async function updateTodo(todoId: number) {
   try {
     const query = "UPDATE todos SET done = true WHERE id = $1 RETURNING *";
     const resp = await client.query(query, [todoId]);
-    console.log({
+    return {
       title: resp.rows[0].title,
       description: resp.rows[0].description,
       done: resp.rows[0].done,
       id: resp.rows[0].id,
-    });
+    };
   } catch (error) {
     console.log(error);
   }
@@ -71,15 +71,14 @@ export async function getTodos(userId: number) {
     const resp = await client.query(query, [userId]);
     const allTodo = resp.rows;
     allTodo.map((todo) => {
-      console.log({
+      return {
         title: todo.title,
         description: todo.description,
         done: todo.done,
         id: todo.id,
-      });
+      };
     });
   } catch (error) {
     console.log(error);
   }
 }
-getTodos(1);
