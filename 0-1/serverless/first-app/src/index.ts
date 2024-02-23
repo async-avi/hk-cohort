@@ -9,9 +9,21 @@
  */
 
 export interface Env {}
+let pingCount = 0;
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+		console.log(request.method);
+		if (request.method == 'GET' && request) {
+			return Response.json({
+				msg: 'This is a GET request',
+			});
+		}
+		if (request.method == 'POST') {
+			return Response.json({
+				msg: 'This is a POST request',
+			});
+		}
+		return Response.json({});
 	},
 };
