@@ -7,3 +7,5 @@ const bob: newUser = {
   name: "Bob",
   email: "bob@example.com",
 };
+
+// bob.name = "Mahesh" //it will show error
