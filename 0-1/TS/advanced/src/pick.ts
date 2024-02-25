@@ -22,7 +22,9 @@ function updateUser(user: User, updatedFields: updatedFieldsOptional) {
   if (age) user.age = age;
   if (city) user.city = city;
 
-  console.log(user);
+  return user;
 }
 
-updateUser(avi, { name: "tina" });
+console.log(avi);
+const updatedUser = updateUser(avi, { name: "tina" });
+console.log(updatedUser);
