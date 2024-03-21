@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
 async function connectDB() {
-  const connection = await mongoose.connect(
-    "mongodb://pandaconnection:3200/test"
-  );
+  const connection = await mongoose.connect(`${process.env.MONGO_URI}`);
   console.log(`Connecting to MongoDB: ${connection.connection.db}`);
 }
 

@@ -1,0 +1,18 @@
+version: "3.6"
+services:
+  mongodb:
+    image: mongo
+    container-name: mongoapp
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_volume:/data/db
+
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URL: "mongodb://mongoapp:27017"
+
+volumes: mongo_volume;
